@@ -1,0 +1,27 @@
+{
+  "name": "pdi",
+  "productName": "FiltrosPDI",
+  "description": "Proyecto para PDI 2021-2, UNAM",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "Juan C. Castrejón",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "10.4.0",
+    "electron-builder": "^22.10.5",
+    "electron-reloader": "^1.2.0"
+  },
+  "build": {
+    "appId": "pid",
+    "win": {
+      "target": "portable",
+      "icon": "assets/icon.ico"
+    }
+  }
+}
