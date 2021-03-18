@@ -31,6 +31,15 @@
                     <option value="8">Escala de grises (G)</option>
                     <option value="9">Escala de grises (B)</option>
                     <option value="10">Mosaico</option>
+                    <option value="11">Alto contraste</option>
+                    <option value="12">Alto contraste inverso</option>
+                    <option value="13">Componentes RGB</option>
+                    <option value="14">Blur 1</option>
+                    <option value="15">Blur 2</option>
+                    <option value="16">Motion blur</option>
+                    <option value="17">Encontrar bordes</option>
+                    <option value="18">Sharpen</option>
+                    <option value="19">Emboss</option>
                 </select></div>
         </div>
         <div class="row">
@@ -61,6 +70,14 @@
                 <div></div>
             </div>
             <div class="col" style="margin-top: 15px;">
+                <div id="RGBSliders" class='d-none'>
+                    <label for="red" class="form-label mb-0">R</label>
+                    <input type="range" class="mt-sm-1 form-range" min="0" max="255" step="1" value="255" id="red">
+                    <label for="green" class="form-label mb-0">G</label>
+                    <input type="range" class="mt-sm-1 form-range" min="0" max="255" step="1" value="255" id="green">
+                    <label for="blue" class="form-label mb-0">B</label>
+                    <input type="range" class="mt-sm-1 form-range" min="0" max="255" step="1" value="255" id="blue">
+                </div>
                 <div id="mosaicsSlider" class='d-none'>
                     <label for="mosaics" class="form-label mb-0">Mosaicos</label>
                     <input type="range" class="mt-sm-1 form-range" min="1" max="75" step="1" value="25" id="mosaics">

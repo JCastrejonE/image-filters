@@ -42,10 +42,10 @@ function updateCanvas() {
   context = original.getContext('2d');
   context.drawImage(originalImg, 0, 0, width, height);
   var brightness = $('#brightness').val();
-  applyFilter($('#filterSel').val(), brightness, false);
+  applyFilter($('#filterSel').val(), brightness);
 }
 
-function applyFilter(filter, value, saving) {
+function applyFilter(filter, value, saving=false) {
   if(!saving) {
     var context = original.getContext('2d');
     var imageData = context.getImageData(0, 0, original.width, original.height);
@@ -53,7 +53,7 @@ function applyFilter(filter, value, saving) {
     var context = output.getContext('2d');
     var imageData = context.getImageData(0, 0, output.width, output.height);
   }
-  $("#mosaicsSlider").addClass("d-none");
+  hideSliders();
   switch (filter) {
     case "1":
       gray1(imageData.data);
@@ -86,6 +86,39 @@ function applyFilter(filter, value, saving) {
       $("#mosaicsSlider").removeClass("d-none");
       mosaic(imageData, $("#mosaics").val());
       break;
+    case "11":
+      highContrast(imageData.data);
+      break;
+    case "12":
+      highContrastInverse(imageData.data);
+      break;
+    case "13":
+      $("#RGBSliders").removeClass("d-none");
+      var rgb = {
+        "red": parseInt($("#red").val()),
+        "green": parseInt($("#green").val()),
+        "blue": parseInt($("#blue").val())
+      }
+      RGBComponents(imageData.data, rgb);
+      break;
+    case "14":
+      blur1(imageData);
+      break;
+    case "15":
+      blur2(imageData);
+      break;
+    case "16":
+      motionBlur(imageData);
+      break;
+    case "17":
+      findEdges(imageData);
+      break;
+    case "18":
+      sharpen(imageData);
+      break;
+    case "19":
+      emboss(imageData);
+      break;
   }
   if (!saving) {
     imageFiltered = new ImageData(imageData.data.slice(), imageData.width, imageData.height);
@@ -97,6 +130,11 @@ function applyFilter(filter, value, saving) {
     context = output.getContext('2d');
   }
   context.putImageData(imageData, 0, 0);
+}
+
+function hideSliders() {
+  $("#mosaicsSlider").addClass("d-none");
+  $("#RGBSliders").addClass("d-none");
 }
 
 $('#selectImg').on('click', function() {
@@ -115,7 +153,7 @@ function saveProcedure() {
   context = output.getContext('2d');
   context.drawImage(originalImg, 0, 0, width, height);
   var brightness = $('#brightness').val();
-  applyFilter($('#filterSel').val(), brightness, true);
+  applyFilter($('#filterSel').val(), brightness, saving=true);
 
   var imageURI = output.toDataURL("image/jpeg", 0.9);
   var filePath = imgSrc.split('.');
@@ -142,7 +180,7 @@ window.api.receive('save-image', (path) => {
 
 $('#filterSel').on('change', function() {
   var brightness = $('#brightness').val();
-  applyFilter(this.value, brightness, false);
+  applyFilter(this.value, brightness);
 })
 
 $(document).on('input', '#brightness', function() {
@@ -154,5 +192,17 @@ $(document).on('input', '#brightness', function() {
 })
 
 $(document).on('input', '#mosaics', function() {
-  applyFilter("10", $("#brightness").val(), false);
+  applyFilter("10", $("#brightness").val());
+})
+
+$(document).on('input', '#red', function() {
+  applyFilter("13", $("#brightness").val());
+})
+
+$(document).on('input', '#green', function() {
+  applyFilter("13", $("#brightness").val());
+})
+
+$(document).on('input', '#blue', function() {
+  applyFilter("13", $("#brightness").val());
 })

@@ -7,8 +7,8 @@
    |--preload.js | Encapsulamiento de programa.
    |--renderer.js | Rutinas para control de GUI.
    |--filters.js | Todos los filtros disponibles.
-   |--package.json | Gestión de paquetes para Node.js
-   |--README.md | Este README
+   |--package.json | Gestión de paquetes para Node.js.
+   |--README.md | Este README.
 ```
 
 ## Pasos para ejecutar código fuente (cualquier plataforma).
