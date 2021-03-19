@@ -4,7 +4,7 @@
   "description": "Proyecto para PDI 2021-2, UNAM",
   "keywords": [],
   "main": "./main.js",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Juan C. Castrejón",
   "scripts": {
     "start": "electron .",

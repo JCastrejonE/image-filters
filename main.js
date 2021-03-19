@@ -200,7 +200,7 @@ let template = [{
 }, {
   label: 'Ay&uda',
   submenu: [{
-    label: 'Version 1.0',
+    label: 'Version 2.0',
     enabled: false
   }, {
     label: '&Acerca de',
