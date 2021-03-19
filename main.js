@@ -92,12 +92,12 @@ function saveFileDialog(data) {
   }
   dialog.showSaveDialog(win, options).then(result => {
     if (result.canceled)
-      return;
+      win.send('saved-image', '');
     if (result.filePath) {
       // Remove header
       let base64Image = data.image.split(';base64,').pop();
       fs.writeFile(result.filePath, base64Image, {encoding: 'base64'}, function(err) { });
-      // win.send('saved-image', result.filePath);
+      win.send('saved-image', result.filePath);
     }
   }).catch(err => { });
 }

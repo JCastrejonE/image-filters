@@ -142,8 +142,15 @@ $('#selectImg').on('click', function() {
 })
 
 $('#saveImg').on('click', function() {
-  saveProcedure();
+  saveLoading();
 })
+
+function saveLoading() {
+  $('#saveImg').prop('disabled', true);
+  $('#save-ready').addClass('d-none');
+  $('#save-loading').removeClass('d-none');
+  setTimeout(function(){saveProcedure();}, 1);
+}
 
 function saveProcedure() {
   var width = originalImg.width;
@@ -174,8 +181,15 @@ window.api.receive('selected-image', (path) => {
 })
 
 window.api.receive('save-image', (path) => {
-  if(!$('#saveImg').prop('disabled'))
-    saveProcedure();
+  if(!$('#saveImg').prop('disabled')) {
+    saveLoading();
+  }
+})
+
+window.api.receive('saved-image', (path) => {
+  $('#saveImg').prop('disabled', false);
+  $('#save-ready').removeClass('d-none');
+  $('#save-loading').addClass('d-none');
 })
 
 $('#filterSel').on('change', function() {
